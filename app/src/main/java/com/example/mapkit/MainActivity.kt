@@ -4,15 +4,21 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Button
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.example.mapkit.ui.theme.MapKitTheme
 import com.yandex.mapkit.Animation
@@ -69,13 +75,38 @@ private lateinit var mapView: MapView
                             text = if (probIndicator) "Пробки" else "Пробки",
                             color = Color.White
                         )
-                        Text(text = "2222")
+
                     }
+                    MyApp()
 
                 }
             }
         }
     }
+    @Composable
+    fun ButtonWithCallback(onClickCallback: () -> Unit) {
+        val buttonText = remember { mutableStateOf("Нажми меня") }
+
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Button(onClick = {
+                buttonText.value = "Кнопка нажата"
+                onClickCallback() // вызов обратного вызова при нажатии на кнопку
+            }) {
+                Text(text = buttonText.value, fontSize = 20.sp)
+            }
+        }
+    }
+
+    @Composable
+    fun MyApp() {
+        ButtonWithCallback {
+            println("Кнопка нажата!")
+        }
+    }
+
 
 
     override fun onStart() {
@@ -90,8 +121,5 @@ private lateinit var mapView: MapView
         super.onStop()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
 
 }
