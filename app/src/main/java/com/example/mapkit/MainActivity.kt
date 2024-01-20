@@ -89,4 +89,8 @@ private lateinit var mapView: MapView
         super.onStop()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
 }
