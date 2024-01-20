@@ -61,14 +61,15 @@ private lateinit var mapView: MapView
                     },
                         containerColor = if (probIndicator) Color.Red else Color.Green,
                             modifier = Modifier
-                            .padding(16.dp)
-                        .size(56.dp)
-                        .align(Alignment.TopEnd),
+                                .padding(16.dp)
+                                .size(56.dp)
+                                .align(Alignment.TopEnd),
                     ) {
                         Text(
                             text = if (probIndicator) "Пробки" else "Пробки",
                             color = Color.White
                         )
+                        Text(text = "2222")
                     }
 
                 }
